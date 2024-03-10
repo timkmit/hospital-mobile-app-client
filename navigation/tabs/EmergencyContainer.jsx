@@ -20,7 +20,12 @@ const BoxStyle = styled.View`
     width: 80%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
-
+const TextBlockView = styled.View`
+    
+    justify-content: center;
+    width: 90%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+`;
 const EmergencyCall = styled.View`
     width: 300px;
     height: 300px;
@@ -45,7 +50,7 @@ const SubmitButtonText = styled.Text`
     color: #fff;
     text-align: center;
     font-weight: bold;
-    font-size: 22;
+    font-size: 22px;
 `;
 
 const ToastContainer = styled.View`
@@ -161,11 +166,7 @@ export default function EmergencyContainer({ navigation }) {
 
     const handleSubmit = () => {
         // You can perform actions here before sending data to the backend
-        console.log("Submitting data to the backend:", {
-            condition: selectedCondition,
-            place: selectedPlace,
-            age: selectedAge,
-        });
+        console.log("Submitting data to the backend");
         showToastMessage();
 
         // Add your backend API call here to send the data
@@ -253,8 +254,9 @@ export default function EmergencyContainer({ navigation }) {
             <ToastText>Вызов отправлен! Помощь уже в пути.</ToastText>
             </ToastContainer>
         )}
-
-            <Text style={{fontSize:20, marginBottom: 10, marginTop: 60}}>Если можете говорить, то позвоните напрямую:</Text>
+            <TextBlockView>
+                <Text style={{fontSize:20, fontWeight: 'bold', marginBottom: 10, marginTop: 60, color: '#696969',textAlign: 'center' }}>Если можете говорить, то нажмите на кнопку снизу</Text>
+            </TextBlockView>
 
         <ViewBlock onPress={makeEmergencyCall} style={{zIndex: 1000}}>
             <EmergencyCall><Ionicons name={'call'} size={150} color={'#709dff'} /></EmergencyCall>
