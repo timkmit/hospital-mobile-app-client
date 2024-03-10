@@ -28,15 +28,29 @@ const Tab = createBottomTabNavigator();
 
                     if(rn === servicesName){
                         iconName = 'home' 
+                        color = focused ? '#e6e6e6' : '#ffffff'
+                        
                     } else if (rn === emergencyName) {
                         iconName = 'heart'
-                        color = focused ? 'red' : 'grey'
+                        color = focused ? 'red' : '#ffffff'
+                        
                     } else if (rn === userName) {
                         iconName = 'person' 
+                        color = focused ? '#e6e6e6' : '#ffffff'
+                        
                     }
+                    
+                    
 
                     return <Ionicons name={iconName} size={size} color={color} />
-                }
+                },
+                tabBarStyle: {
+                    backgroundColor: '#b3bfda'
+                },
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                    color: '#ffffff',
+                },
             })}>
 
                 <Tab.Screen name={servicesName} component={ServicesContainer}/>
