@@ -8,9 +8,9 @@ import ServicesContainer from "./ServicesContainer";
 import EmergencyContainer from "./EmergencyContainer";
 import UserContainer from "./UserContainer";
 
-const servicesName = 'Services';
-const emergencyName = 'Emergency';
-const userName = 'User';
+const servicesName = 'Услуги';
+const emergencyName = 'Срочный вызов';
+const userName = 'Профиль';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,15 +28,15 @@ const Tab = createBottomTabNavigator();
 
                     if(rn === servicesName){
                         iconName = 'home' 
-                        color = focused ? '#e6e6e6' : '#ffffff'
+                        color = focused ? '#3a68ff' : '#8d8d8d'
                         
                     } else if (rn === emergencyName) {
                         iconName = 'heart'
-                        color = focused ? 'red' : '#ffffff'
+                        color = focused ? 'red' : '#8d8d8d'
                         
                     } else if (rn === userName) {
                         iconName = 'person' 
-                        color = focused ? '#e6e6e6' : '#ffffff'
+                        color = focused ? '#3a68ff' : '#8d8d8d'
                         
                     }
                     
@@ -45,11 +45,11 @@ const Tab = createBottomTabNavigator();
                     return <Ionicons name={iconName} size={size} color={color} />
                 },
                 tabBarStyle: {
-                    backgroundColor: '#b3bfda'
+                    backgroundColor: '#f3f3f3'
                 },
                 tabBarLabelStyle: {
                     fontSize: 12,
-                    color: '#ffffff',
+                    color: '#c2c2c2',
                 },
             })}>
 

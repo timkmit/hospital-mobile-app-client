@@ -9,11 +9,11 @@ import {Linking} from 'react-native'
 const InputStyle = styled.View`
     justify-content: center;
     font-size: 60px;
-    width: 100%;
+    width: 80%;
     height: 50px;
     text-align: center;
-    margin: 3px;
-    
+    margin: 3px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
 const EmergencyCall = styled.View`
@@ -25,6 +25,7 @@ const EmergencyCall = styled.View`
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
 const SubmitButton = styled.TouchableOpacity`
@@ -32,6 +33,7 @@ const SubmitButton = styled.TouchableOpacity`
     padding: 15px;
     border-radius: 5px;
     margin-top: 20px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 `;
 
 const SubmitButtonText = styled.Text`
