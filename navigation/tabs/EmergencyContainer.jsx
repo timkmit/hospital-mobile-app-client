@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 import styled from "styled-components";
@@ -13,6 +13,11 @@ const InputStyle = styled.View`
     height: 50px;
     text-align: center;
     margin: 3px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+`;
+const BoxStyle = styled.View`
+    text-align: center;
+    width: 80%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
@@ -40,6 +45,22 @@ const SubmitButtonText = styled.Text`
     color: #fff;
     text-align: center;
     font-weight: bold;
+    font-size: 22;
+`;
+
+const ToastContainer = styled.View`
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  align-items: center;
+  
+`;
+
+const ToastText = styled.Text`
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
 `;
 
 const ViewBlock = styled.TouchableOpacity`
@@ -52,18 +73,18 @@ const makeEmergencyCall = () => {
 
 const pickerSelectStyles = {
     inputIOS: {
-        fontSize: 18,
+        fontSize: 22,
         paddingVertical: 12,
         paddingHorizontal: 10,
         borderRadius: 4,
-        color: 'black',
+        color: '#3d9662',
         textAlign: 'center',
-        fontWeight: 500,
+        fontWeight: 'bold',
         backgroundColor: '#c5ffc8',
 
     },
     placeholder: {
-        color: 'black',
+        color: '#be5252',
         fontWeight: 'bold',
         textAlign: 'center',
         backgroundColor: '#fddbdb',
@@ -77,17 +98,17 @@ const pickerSelectStyles = {
 
 const pickerSelectStylesPlace = {
     inputIOS: {
-        fontSize: 18,
+        fontSize: 22,
         paddingVertical: 12,
         paddingHorizontal: 10,
         borderRadius: 4,
-        color: 'black',
+        color: '#3d9662',
         textAlign: 'center',
-        fontWeight: 500,
+        fontWeight: 'bold',
         backgroundColor: '#c5ffc8',
     },
     placeholder: {
-        color: 'black',
+        color: '#be5252',
         fontWeight: 'bold',
         textAlign: 'center',
         backgroundColor: '#fddbdb',
@@ -104,17 +125,17 @@ const pickerSelectStylesPlace = {
 
 const pickerSelectStylesAge = {
     inputIOS: {
-        fontSize: 18,
+        fontSize: 22,
         paddingVertical: 12,
         paddingHorizontal: 10,
-        borderRadius: 0,
-        color: 'black',
+        borderRadius: 4,
+        color: '#3d9662',
         textAlign: 'center',
-        fontWeight: 500,
+        fontWeight: 'bold',
         backgroundColor: '#c5ffc8',
     },
     placeholder: {
-        color: 'black',
+        color: '#be5252',
         fontWeight: 'bold',
         textAlign: 'center',
         backgroundColor: '#fddbdb',
@@ -132,6 +153,8 @@ const ageRangesData = { '5': '0-5 лет', '510': '5-10 лет', '1014': '10-14 
 
 export default function EmergencyContainer({ navigation }) {
 
+    const [showToast, setShowToast] = useState(false);
+
     const [selectedCondition, setSelectedCondition] = useState(null);
     const [selectedPlace, setSelectedPlace] = useState(null);
     const [selectedAge, setSelectedAge] = useState(null);
@@ -143,6 +166,7 @@ export default function EmergencyContainer({ navigation }) {
             place: selectedPlace,
             age: selectedAge,
         });
+        showToastMessage();
 
         // Add your backend API call here to send the data
         // For example, you can use fetch or axios to make a POST request
@@ -152,6 +176,21 @@ export default function EmergencyContainer({ navigation }) {
         setSelectedPlace(null);
         setSelectedAge(null);
     };
+
+    const showToastMessage = () => {
+        setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 2000);
+      };
+    
+      useEffect(() => {
+        if (showToast) {
+          setTimeout(() => {
+            setShowToast(false);
+          }, 3000);
+        }
+      }, [showToast]);
 
     const placeItems = Object.keys(placeData).map(key => ({
         label: placeData[key],
@@ -169,7 +208,7 @@ export default function EmergencyContainer({ navigation }) {
     }));
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: '#ffffff' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: '#ffffff', paddingTop: 10 }}>
         
         <InputStyle>
             <RNPickerSelect
@@ -204,9 +243,16 @@ export default function EmergencyContainer({ navigation }) {
                 style={pickerSelectStylesAge}
             />
         </InputStyle>
+        <BoxStyle>
         <SubmitButton onPress={handleSubmit}>
                 <SubmitButtonText>Быстрый вызов</SubmitButtonText>
         </SubmitButton>
+        </BoxStyle>
+        {showToast && (
+            <ToastContainer>
+            <ToastText>Вызов отправлен! Помощь уже в пути.</ToastText>
+            </ToastContainer>
+        )}
 
             <Text style={{fontSize:20, marginBottom: 10, marginTop: 60}}>Если можете говорить, то позвоните напрямую:</Text>
 
